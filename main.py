@@ -13,12 +13,14 @@ Correct Output:
   # Because nums[0] + nums[1] == 9, we return [0, 1].
 """
 
+from solutions import fast
+
 
 ########
 # Write your code in this function
 ########
 def solution(nums, target):
-  pass
+  return fast(nums, target)
 
 
 
