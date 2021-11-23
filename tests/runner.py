@@ -8,7 +8,9 @@ def run_test(f, test):
   target = test.data["target"]
   
   actual = f(nums, target)
-  actual_reversed = [actual[1], actual[0]]
+  actual_reversed = actual
+  if actual != None:
+    actual_reversed = [actual[1], actual[0]]
 
   expected = test.answer
 
@@ -17,19 +19,20 @@ def run_test(f, test):
   
 
 # Run all the tests
-def run(f):
+def run_tests(f, runs=1000):
   testNum = 0
-  runs = 1000
   test_times = []
 
   try:
     for test in build_tests():
+      testNum += 1
+      print(f"[RUNNING] Test {testNum}...", end="\r")
+
       timer = Timer(lambda: run_test(f, test))
       ms = timer.timeit(runs) * 1000 / runs
-      print(f"[PASS] Test {testNum}: {ms:.5f}ms")
-      testNum += 1
-
+      
       test_times.append(ms)
+      print(f"[PASS] Test {testNum}: {ms:.5f}ms")
 
     print(f"Average time: {mean(test_times):.5f}ms")
 
